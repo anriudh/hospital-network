@@ -2,3 +2,5 @@ tools/
 projects/
 __pycache__/
 *.pyc
+crash.dmp
+crash.dmp.log
