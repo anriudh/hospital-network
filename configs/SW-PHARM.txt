@@ -26,8 +26,8 @@ interface FastEthernet0/1
  switchport mode access
  switchport port-security
  switchport port-security maximum 2
- switchport port-security mac-address sticky
- switchport port-security violation restrict
+ switchport port-security mac-address sticky 
+ switchport port-security violation restrict 
  switchport port-security mac-address sticky 0060.5C55.D00D
  spanning-tree portfast
 !
@@ -36,8 +36,8 @@ interface FastEthernet0/2
  switchport mode access
  switchport port-security
  switchport port-security maximum 2
- switchport port-security mac-address sticky
- switchport port-security violation restrict
+ switchport port-security mac-address sticky 
+ switchport port-security violation restrict 
  switchport port-security mac-address sticky 0002.17A9.D06D
  spanning-tree portfast
 !
