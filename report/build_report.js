@@ -9,12 +9,11 @@ const {
 } = require("docx");
 
 // ---- team details (edit here, then rebuild) ----
-const TEAM = [
-  ["Anirudh A Menon", ""],
-  ["Nagabhavit Pampati", ""],
-  ["Chinmay Ghosh", ""],
-  ["Adnan Ahmad Khan", ""],
-];
+const TEAM = ["Anirudh A Menon", "Nagabhavit Pampati", "Chinmay Ghosh", "Adnan Ahmad Khan"];
+// Registration numbers stay out of git: team.local.json maps name -> reg no.
+// Without it the title page lists names only.
+const REG_FILE = path.join(__dirname, "team.local.json");
+const REG = fs.existsSync(REG_FILE) ? JSON.parse(fs.readFileSync(REG_FILE, "utf8")) : null;
 const TITLE = "Design and Simulation of a Secure, Fault-Tolerant Hospital Network using Cisco Packet Tracer";
 const COURSE = "Computer Networks (PE-7, Program Elective)";
 const COLLEGE = "Manipal Institute of Technology, Bengaluru";
@@ -144,9 +143,11 @@ const front = [
     border: { bottom: { style: BorderStyle.SINGLE, size: 8, color: HEAD, space: 6 } },
   }),
   field("Project title", TITLE),
-  new Paragraph({ children: [t("Student names and registration numbers:", { bold: true })], spacing: { after: 40 } }),
-  table(["#", "Student name", "Registration number"],
-    TEAM.map((m, i) => [String(i + 1), m[0], m[1]]), [500, 4600, 3200], { size: 20 }),
+  new Paragraph({ children: [t(REG ? "Student names and registration numbers:" : "Student names:", { bold: true })], spacing: { after: 40 } }),
+  REG
+    ? table(["#", "Student name", "Registration number"],
+      TEAM.map((n, i) => [String(i + 1), n, REG[n]]), [500, 4600, 3200], { size: 20 })
+    : table(["#", "Student name"], TEAM.map((n, i) => [String(i + 1), n]), [500, 7800], { size: 20 }),
   new Paragraph({ children: [], spacing: { after: 40 } }),
   new Paragraph({
     children: [t("Course and section: ", { bold: true }), t(COURSE),

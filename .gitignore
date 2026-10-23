@@ -6,3 +6,8 @@ crash.dmp
 crash.dmp.log
 report/.venv/
 report/node_modules/
+docs/
+evidence/
+HANDOFF.md
+report/team.local.json
+report/submitted/
