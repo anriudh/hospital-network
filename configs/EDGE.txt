@@ -1,0 +1,114 @@
+!
+version 15.1
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+service password-encryption
+!
+hostname EDGE
+!
+!
+!
+enable secret 5 $1$mERr$/VT.EosIwbboaDHzZXq7r1
+!
+!
+!
+!
+!
+!
+ip cef
+no ipv6 cef
+!
+!
+!
+username admin secret 5 $1$mERr$5.a6P4JqbNiMX01usIfka/
+!
+!
+license udi pid CISCO2911/K9 sn FTX15245IKF-
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+ip ssh version 2
+no ip domain-lookup
+ip domain-name hospital.local
+!
+!
+spanning-tree mode pvst
+!
+!
+!
+!
+!
+!
+interface GigabitEthernet0/0
+ description to CORE1 Fa0/24
+ ip address 172.16.11.81 255.255.255.252
+ ip nat inside
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/1
+ description to CORE2 Fa0/24
+ ip address 172.16.11.85 255.255.255.252
+ ip nat inside
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/2
+ description to ISP
+ ip address 203.0.113.2 255.255.255.252
+ ip nat outside
+ duplex auto
+ speed auto
+!
+interface Vlan1
+ no ip address
+!
+router ospf 1
+ router-id 3.3.3.3
+ log-adjacency-changes
+ network 172.16.11.80 0.0.0.3 area 0
+ network 172.16.11.84 0.0.0.3 area 0
+ default-information originate
+!
+ip nat inside source list NAT-INSIDE interface GigabitEthernet0/2 overload
+ip classless
+ip route 0.0.0.0 0.0.0.0 203.0.113.1
+!
+ip flow-export version 9
+!
+!
+ip access-list standard NAT-INSIDE
+ permit 172.16.10.0 0.0.1.255
+ip access-list standard MGMT-SSH
+ permit 172.16.11.0 0.0.0.31
+!
+!
+!
+!
+!
+line con 0
+ password 7 08224340584B56
+ login
+!
+line aux 0
+!
+line vty 0 4
+ access-class MGMT-SSH in
+ login local
+ transport input ssh
+line vty 5 15
+ access-class MGMT-SSH in
+ login local
+ transport input ssh
+!
+!
+!
+end
