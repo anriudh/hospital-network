@@ -4,3 +4,5 @@ __pycache__/
 *.pyc
 crash.dmp
 crash.dmp.log
+report/.venv/
+report/node_modules/
