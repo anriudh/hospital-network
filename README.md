@@ -202,5 +202,3 @@ Then run `to_pdf.ps1` in PowerShell for the PDF (needs Microsoft Word). The publ
 - Nagabhavit Pampati
 - Chinmay Ghosh
 - Adnan Ahmad Khan
-
-Computer Networks (PE-7, Program Elective), Manipal Institute of Technology, Bengaluru, October 2026.
